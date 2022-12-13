@@ -1,6 +1,8 @@
 from tkinter import *
 from chat import get_response, bot_name
 from turtle import Turtle, Screen
+from config.sql_connection import engine
+
 
 
 BG_GRAY = "#ABB2B9"

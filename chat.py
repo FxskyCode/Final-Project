@@ -5,7 +5,15 @@ import subprocess
 import os
 import tools.sql_queries as sql
 import sqlalchemy as alch
+from tkinter import *
+from PIL import ImageTk, Image
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
+sns.set_context("poster")
+sns.set(rc={"figure.figsize": (12.,6.)})
+sns.set_style("whitegrid")
 
 import torch
 
@@ -38,7 +46,16 @@ model.eval()
 bot_name = "Iron"
 
 def get_response(msg):
-    if "search" in msg:
+    if "sql" in msg:
+        graph = sql.get_top_valuation()
+        df = pd.DataFrame.from_records(graph)
+        sns.histplot(data=df, x=df.Valuation, y=df.Company)
+        plt.savefig("save_as_a_png.png")
+        os.system('open save_as_a_png.png')
+        return "plotting graph"
+
+
+    elif "search" in msg:
         search_google(msg)
         return "Searching"
     elif msg in fun_list:

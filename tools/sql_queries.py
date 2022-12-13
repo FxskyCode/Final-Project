@@ -11,5 +11,5 @@ def get_top_valuation ():
 	ORDER BY Valuation DESC
     LIMIT 5;"""
     df = pd.read_sql_query(query, engine)
-    return df.to_dict(orient="records")
+    return df
 
